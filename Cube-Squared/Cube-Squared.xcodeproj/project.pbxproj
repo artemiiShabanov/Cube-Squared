@@ -24,6 +24,10 @@
 		A4B0F1F429C8F02B008C653A /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B0F1F329C8F02B008C653A /* Haptics.swift */; };
 		A4B0F1F629C8F132008C653A /* GestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B0F1F529C8F132008C653A /* GestureRecognizer.swift */; };
 		A4B0F1F829CA7A0F008C653A /* Improvements-list.txt in Resources */ = {isa = PBXBuildFile; fileRef = A4B0F1F729CA7A0F008C653A /* Improvements-list.txt */; };
+		A4E4FE1729CB4FEB0087D372 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4E4FE1629CB4FEB0087D372 /* Colors.xcassets */; };
+		A4E4FE1929CB4FF50087D372 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4E4FE1829CB4FF50087D372 /* Images.xcassets */; };
+		A4E4FE1B29CB50540087D372 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E4FE1A29CB50540087D372 /* Colors.swift */; };
+		A4E4FE1D29CB50BC0087D372 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E4FE1C29CB50BC0087D372 /* Assets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +49,10 @@
 		A4B0F1F329C8F02B008C653A /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		A4B0F1F529C8F132008C653A /* GestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureRecognizer.swift; sourceTree = "<group>"; };
 		A4B0F1F729CA7A0F008C653A /* Improvements-list.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Improvements-list.txt"; sourceTree = "<group>"; };
+		A4E4FE1629CB4FEB0087D372 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		A4E4FE1829CB4FF50087D372 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A4E4FE1A29CB50540087D372 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		A4E4FE1C29CB50BC0087D372 /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +110,6 @@
 			children = (
 				A4B0F1C429C37BBC008C653A /* GameScene.swift */,
 				A4B0F1F529C8F132008C653A /* GestureRecognizer.swift */,
-				A4B0F1ED29C8EF5E008C653A /* Sounds.swift */,
 				A4B0F1F329C8F02B008C653A /* Haptics.swift */,
 			);
 			path = Scene;
@@ -111,6 +118,7 @@
 		A4B0F1E529C8EBA1008C653A /* Project */ = {
 			isa = PBXGroup;
 			children = (
+				A4E4FE1529CB4FD20087D372 /* Resources */,
 				A4B0F1E929C8EF11008C653A /* Sounds */,
 				A4B0F1BE29C37BBC008C653A /* AppDelegate.swift */,
 				A4B0F1E729C8ED21008C653A /* UserDefaults+AppDomain.swift */,
@@ -132,10 +140,30 @@
 		A4B0F1E929C8EF11008C653A /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				A4B0F1ED29C8EF5E008C653A /* Sounds.swift */,
 				A4B0F1EF29C8EFA7008C653A /* coin.wav */,
 				A4B0F1EA29C8EF3F008C653A /* roll.wav */,
 			);
 			path = Sounds;
+			sourceTree = "<group>";
+		};
+		A4E4FE1529CB4FD20087D372 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A4E4FE1E29CB5AA30087D372 /* Particles */,
+				A4E4FE1629CB4FEB0087D372 /* Colors.xcassets */,
+				A4E4FE1A29CB50540087D372 /* Colors.swift */,
+				A4E4FE1829CB4FF50087D372 /* Images.xcassets */,
+				A4E4FE1C29CB50BC0087D372 /* Assets.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A4E4FE1E29CB5AA30087D372 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Particles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,11 +225,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4B0F1EB29C8EF3F008C653A /* roll.wav in Resources */,
+				A4E4FE1929CB4FF50087D372 /* Images.xcassets in Resources */,
 				A4B0F1F029C8EFA7008C653A /* coin.wav in Resources */,
 				A4B0F1CA29C37BBC008C653A /* Main.storyboard in Resources */,
 				A4B0F1CC29C37BBD008C653A /* Assets.xcassets in Resources */,
 				A4B0F1CF29C37BBD008C653A /* LaunchScreen.storyboard in Resources */,
 				A4B0F1F829CA7A0F008C653A /* Improvements-list.txt in Resources */,
+				A4E4FE1729CB4FEB0087D372 /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,12 +243,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4B0F1DF29C8AFA1008C653A /* Field.swift in Sources */,
+				A4E4FE1B29CB50540087D372 /* Colors.swift in Sources */,
 				A4B0F1E329C8BB6F008C653A /* Preferences.swift in Sources */,
 				A4B0F1F429C8F02B008C653A /* Haptics.swift in Sources */,
 				A4B0F1E129C8B44B008C653A /* Geometry.swift in Sources */,
 				A4B0F1C529C37BBC008C653A /* GameScene.swift in Sources */,
 				A4B0F1E829C8ED21008C653A /* UserDefaults+AppDomain.swift in Sources */,
 				A4B0F1C729C37BBC008C653A /* GameViewController.swift in Sources */,
+				A4E4FE1D29CB50BC0087D372 /* Assets.swift in Sources */,
 				A4B0F1F629C8F132008C653A /* GestureRecognizer.swift in Sources */,
 				A4B0F1EE29C8EF5E008C653A /* Sounds.swift in Sources */,
 				A4B0F1BF29C37BBC008C653A /* AppDelegate.swift in Sources */,

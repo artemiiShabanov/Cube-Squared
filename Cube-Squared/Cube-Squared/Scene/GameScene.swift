@@ -9,13 +9,14 @@ protocol GameSceneDelegate: AnyObject {
 
 class GameScene: SKScene {
     private enum Constants {
-        static let tileSize = CGSize(width: 40, height: 40)
+        static let offset: CGFloat = 90
         static let moveDuration: TimeInterval = 0.1
-        static let rollDuration: TimeInterval = 0.06
+        static let rollDuration: TimeInterval = 0.07
     }
     
     weak var gameSceneDelegate: GameSceneDelegate?
     private var prefs: Preferences
+    private var tileSize: CGSize
     
     // Layers
     let bottomLayer = SKNode()
@@ -36,18 +37,18 @@ class GameScene: SKScene {
     private var rollingDirection: Direction? {
         didSet {
             guard let rollingDirection else {
-                cube?.color = .red
+//                cube?.color = .red
                 return
             }
             switch rollingDirection {
             case .top:
-                cube?.color = .blue
+                cube?.zRotation = .pi / 2
             case .bottom:
-                cube?.color = .orange
+                cube?.zRotation = -.pi / 2
             case .left:
-                cube?.color = .purple
+                cube?.zRotation = .pi
             case .right:
-                cube?.color = .black
+                cube?.zRotation = 0
             }
             
         }
@@ -57,13 +58,15 @@ class GameScene: SKScene {
     
     init(size: CGSize, prefs: Preferences) {
         self.prefs = prefs
+        let edge = (size.width - Constants.offset) / CGFloat(prefs.fieldSize.width)
+        self.tileSize = .init(width: edge, height: edge)
         super.init(size: size)
         
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
         let layerPosition = CGPoint(
-            x: -Constants.tileSize.width * CGFloat(prefs.fieldSize.width) / 2,
-            y: -Constants.tileSize.height * CGFloat(prefs.fieldSize.height) / 2
+            x: -tileSize.width * CGFloat(prefs.fieldSize.width) / 2,
+            y: -tileSize.height * CGFloat(prefs.fieldSize.height) / 2
         )
         
         addChild(bottomLayer)
@@ -73,6 +76,8 @@ class GameScene: SKScene {
         bottomLayer.position = layerPosition
         midLayer.position = layerPosition
         topLayer.position = layerPosition
+        
+        backgroundColor = .black
     }
     
     required init?(coder aDecoder: NSCoder) { fatalError() }
@@ -115,7 +120,7 @@ extension GameScene {
         
         for x in 0..<prefs.fieldSize.width {
             for y in 0..<prefs.fieldSize.height {
-                let emptyTile = SKSpriteNode(color: .gray, size: Constants.tileSize)
+                let emptyTile = generateEmptyTile()
                 bottomLayer.addChild(emptyTile)
                 let c = Coordinate(x: x, y: y)
                 emptyTile.position = point(for: c)
@@ -125,7 +130,7 @@ extension GameScene {
     }
     
     func placeCube(at c: Coordinate) {
-        let newCube = SKSpriteNode(color: .red, size: Constants.tileSize)
+        let newCube = generateCube()
         topLayer.addChild(newCube)
         newCube.position = point(for: c)
         
@@ -135,13 +140,14 @@ extension GameScene {
     func moveCube(to d: Direction, rolling: Bool) {
         guard let cube, let newC = convert(point: cube.position)?.shifted(to: d) else { return }
         
-        if rolling, case .registering = ggr.state {
-            self.rollingDirection = d
-        }
+        self.rollingDirection = d
+        let duration = rolling ? Constants.rollDuration : Constants.moveDuration
+        
         Haptics.shared.playSoft()
         isCubeMoving = true
         cube.run(.group([
-            .move(to: point(for: newC), duration: rolling ? Constants.rollDuration : Constants.moveDuration),
+            .move(to: point(for: newC), duration: duration),
+            .animate(with: Assets.cubeRoll.map { .init(imageNamed: $0) }, timePerFrame: duration / Double(Assets.cubeRoll.count)),
             SoundFX.rollSound
         ])) { [weak self] in
             guard let self else { return }
@@ -151,14 +157,19 @@ extension GameScene {
     
     func addTrace(at c: Coordinate, time: TimeInterval) {
         removeTrace(at: c)
-        let trace = SKSpriteNode(color: .green, size: Constants.tileSize)
+        let trace = generateTrace()
         midLayer.addChild(trace)
         trace.position = point(for: c)
         traces[c] = trace
         
-        trace.run(.fadeOut(withDuration: time), completion: { [weak self] in
+        trace.alpha = 0.8
+        trace.run(.sequence([
+            .fadeAlpha(by: -0.6, duration: time - 1),
+            .wait(forDuration: 0.9),
+            .scale(to: 0, duration: 0.1)
+        ])) { [weak self] in
             self?.gameSceneDelegate?.traceExpired(at: c)
-        })
+        }
     }
     
     func removeTrace(at c: Coordinate) {
@@ -166,7 +177,7 @@ extension GameScene {
     }
     
     func addCoin(at c: Coordinate, time: TimeInterval) {
-        let coin = SKSpriteNode(color: .yellow, size: Constants.tileSize)
+        let coin = generateCoin()
         midLayer.addChild(coin)
         coin.position = point(for: c)
         coins[c] = coin
@@ -227,7 +238,7 @@ private extension GameScene {
         gameSceneDelegate?.pan(to: dirs, rolling: true)
     }
     func handleEnded() {
-        rollingDirection = nil
+//        rollingDirection = nil
     }
 }
 
@@ -236,17 +247,43 @@ private extension GameScene {
 private extension GameScene {
     func point(for c: Coordinate) -> CGPoint {
         CGPoint(
-            x: CGFloat(c.x) * Constants.tileSize.width + Constants.tileSize.width / 2,
-            y: CGFloat(c.y) * Constants.tileSize.height + Constants.tileSize.height / 2
+            x: CGFloat(c.x) * tileSize.width + tileSize.width / 2,
+            y: CGFloat(c.y) * tileSize.height + tileSize.height / 2
         )
     }
     
     func convert(point: CGPoint) -> Coordinate? {
-        if point.x >= 0 && point.x < CGFloat(prefs.fieldSize.width) * Constants.tileSize.width &&
-            point.y >= 0 && point.y < CGFloat(prefs.fieldSize.height) * Constants.tileSize.height {
-            return .init(x: Int(point.x / Constants.tileSize.width), y: Int(point.y / Constants.tileSize.height))
+        if point.x >= 0 && point.x < CGFloat(prefs.fieldSize.width) * tileSize.width &&
+            point.y >= 0 && point.y < CGFloat(prefs.fieldSize.height) * tileSize.height {
+            return .init(x: Int(point.x / tileSize.width), y: Int(point.y / tileSize.height))
         } else {
             return nil
         }
+    }
+}
+
+// MARK: - Sprites
+
+private extension GameScene {
+    func generateEmptyTile() -> SKSpriteNode {
+        generateTile(with: Assets.emptyTile)
+    }
+    
+    func generateTrace() -> SKSpriteNode {
+        generateTile(with: Assets.trace)
+    }
+    
+    func generateCoin() -> SKSpriteNode {
+        generateTile(with: Assets.coin)
+    }
+    
+    func generateCube() -> SKSpriteNode {
+        generateTile(with: Assets.cube)
+    }
+    
+    func generateTile(with asset: String) -> SKSpriteNode {
+        let emptyTile = SKSpriteNode(imageNamed: asset)
+        emptyTile.size = tileSize
+        return emptyTile
     }
 }
