@@ -28,6 +28,7 @@
 		A4E4FE1929CB4FF50087D372 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4E4FE1829CB4FF50087D372 /* Images.xcassets */; };
 		A4E4FE1B29CB50540087D372 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E4FE1A29CB50540087D372 /* Colors.swift */; };
 		A4E4FE1D29CB50BC0087D372 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E4FE1C29CB50BC0087D372 /* Assets.swift */; };
+		A4E4FE2229CBB0080087D372 /* WickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E4FE2129CBB0080087D372 /* WickView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		A4E4FE1829CB4FF50087D372 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A4E4FE1A29CB50540087D372 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		A4E4FE1C29CB50BC0087D372 /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		A4E4FE2129CBB0080087D372 /* WickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WickView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				A4B0F1C629C37BBC008C653A /* GameViewController.swift */,
+				A4E4FE2129CBB0080087D372 /* WickView.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 			files = (
 				A4B0F1DF29C8AFA1008C653A /* Field.swift in Sources */,
 				A4E4FE1B29CB50540087D372 /* Colors.swift in Sources */,
+				A4E4FE2229CBB0080087D372 /* WickView.swift in Sources */,
 				A4B0F1E329C8BB6F008C653A /* Preferences.swift in Sources */,
 				A4B0F1F429C8F02B008C653A /* Haptics.swift in Sources */,
 				A4B0F1E129C8B44B008C653A /* Geometry.swift in Sources */,
@@ -407,8 +411,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -435,8 +438,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

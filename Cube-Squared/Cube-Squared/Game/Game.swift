@@ -11,6 +11,9 @@ enum GameEvent {
     case coinAppeared(c: Coordinate)
     case coinDisappeared(c: Coordinate)
     case coinEaten(c: Coordinate)
+    
+    case scoreChanged(new: Int)
+    case hpChanged(new: Int)
 }
 
 protocol GameEventDelegate: AnyObject {
@@ -22,7 +25,16 @@ final class Game {
     private var cubePosition: Coordinate
     private let preferences: Preferences
     
-    private(set) var score: Int = 0
+    private(set) var score: Int = 0 {
+        didSet {
+            delegate?.handle(event: .scoreChanged(new: score))
+        }
+    }
+    private(set) var hp: Int = 0 {
+        didSet {
+            delegate?.handle(event: .hpChanged(new: hp))
+        }
+    }
     
     weak var delegate: GameEventDelegate?
     
@@ -36,6 +48,10 @@ final class Game {
     
     func startGame() {
         field.clean()
+        
+        score = 0
+        hp = preferences.startingHp
+        
         cubePosition = randomCoordinate(excludingTiles: [])!
         delegate?.handle(event: .cubeAppeared(c: cubePosition))
         placeCoin()
@@ -94,7 +110,7 @@ final class Game {
         field.del(type: .coin, at: c)
         delegate?.handle(event: .coinDisappeared(c: c))
         
-        score -= 1
+        hp -= 1
         placeCoin()
     }
     

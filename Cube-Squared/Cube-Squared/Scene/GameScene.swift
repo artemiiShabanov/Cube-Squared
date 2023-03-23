@@ -152,6 +152,7 @@ extension GameScene {
         ])) { [weak self] in
             guard let self else { return }
             self.isCubeMoving = false
+            self.cube?.texture = .init(imageNamed: Assets.cube)
         }
     }
     

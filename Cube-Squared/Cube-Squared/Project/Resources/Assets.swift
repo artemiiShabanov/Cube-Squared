@@ -7,11 +7,16 @@ enum Assets {
     static let cube = "cube"
     
     static let cubeRoll = [
-        "cube",
+        "cube1",
         "cube2",
         "cube3",
         "cube4",
         "cube5",
-        "cube"
+        "cube6"
     ]
+}
+
+enum Images {
+    static let hp = UIImage(named: "hp")
+    static let c = UIImage(named: "c")
 }
