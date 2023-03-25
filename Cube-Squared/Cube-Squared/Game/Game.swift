@@ -8,12 +8,14 @@ enum GameEvent {
     case traceAppeared(c: Coordinate)
     case traceDisappeared(c: Coordinate)
     
-    case coinAppeared(c: Coordinate)
+    case coinAppeared(c: Coordinate, is5: Bool)
     case coinDisappeared(c: Coordinate)
     case coinEaten(c: Coordinate)
     
     case scoreChanged(new: Int)
     case hpChanged(new: Int)
+    
+    case gameOver
 }
 
 protocol GameEventDelegate: AnyObject {
@@ -72,7 +74,7 @@ final class Game {
     func rollIfPossible(to dirs: [Direction]) -> Bool {
         for d in dirs {
             let shifted = cubePosition.shifted(to: d)
-            if field.has(type: .trace, at: shifted) || field.has(type: .coin, at: shifted) {
+            if field.has(type: .trace, at: shifted) || field.has(type: .coin, at: shifted) || field.has(type: .coin5, at: shifted) {
                 moveCube(to: d, rolling: true)
                 return true
             }
@@ -94,10 +96,15 @@ final class Game {
             field.del(type: .coin, at: cubePosition)
             delegate?.handle(event: .coinEaten(c: cubePosition))
             placeCoin()
+        } else if field.has(type: .coin5, at: cubePosition) {
+            score += 5
+            field.del(type: .coin5, at: cubePosition)
+            delegate?.handle(event: .coinEaten(c: cubePosition))
+            placeCoin()
         }
     }
     
-    // MARK: - Game cicle API
+    // MARK: - Game cycle API
     
     func expiredTrace(at c: Coordinate) {
         assert(field.has(type: .trace, at: c))
@@ -106,12 +113,17 @@ final class Game {
     }
     
     func expiredCoin(at c: Coordinate) {
-        assert(field.has(type: .coin, at: c))
+        assert(field.has(type: .coin, at: c) || field.has(type: .coin5, at: c))
         field.del(type: .coin, at: c)
+        field.del(type: .coin5, at: c)
         delegate?.handle(event: .coinDisappeared(c: c))
         
         hp -= 1
-        placeCoin()
+        if hp > 0 {
+            placeCoin()
+        } else {
+            delegate?.handle(event: .gameOver)
+        }
     }
     
 }
@@ -120,11 +132,11 @@ final class Game {
 
 extension Game {
     var traceLifetime: TimeInterval {
-        preferences.traceLifetime
+        preferences.traceFunction(score)
     }
     
     var coinLifetime: TimeInterval {
-        preferences.coinLifetime
+        preferences.coinFunction(score)
     }
 }
 
@@ -139,7 +151,8 @@ private extension Game {
         guard let c = randomCoordinate(excludingTiles: [.cube]) else {
             return
         }
-        field.add(type: .coin, at: c)
-        delegate?.handle(event: .coinAppeared(c: c))
+        let is5 = Random.bool(with: preferences.coin5Chance)
+        field.add(type: is5 ? .coin5 : .coin, at: c)
+        delegate?.handle(event: .coinAppeared(c: c, is5: is5))
     }
 }

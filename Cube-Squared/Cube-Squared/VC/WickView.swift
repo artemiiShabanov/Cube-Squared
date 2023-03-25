@@ -12,7 +12,7 @@ final class WickView: UIView {
         
         addSubview(wick)
         wick.alpha = 0
-        wick.backgroundColor = Colors.coin?.withAlphaComponent(0.7)
+        wick.backgroundColor = Colors.coin.withAlphaComponent(0.7)
         wick.translatesAutoresizingMaskIntoConstraints = false
         
         widthConstraint = wick.widthAnchor.constraint(equalTo: widthAnchor)
@@ -31,8 +31,9 @@ final class WickView: UIView {
     
     required init?(coder: NSCoder) { fatalError() }
     
-    func fire(with time: TimeInterval) {
+    func fire(with time: TimeInterval, color: UIColor) {
         widthConstraint.constant = 0
+        wick.backgroundColor = color.withAlphaComponent(0.7)
         layoutIfNeeded()
         UIView.animate(withDuration: 0.5) {
             self.wick.alpha = 1

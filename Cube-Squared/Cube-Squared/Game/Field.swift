@@ -4,6 +4,7 @@ enum TileType: Int, CaseIterable {
     case coin = 0
     case trace
     case cube
+    case coin5
     
     fileprivate var val: Int {
         return 1 << rawValue
