@@ -5,9 +5,16 @@ import GameplayKit
 class GameViewController: UIViewController {
     
     // MARK: IBOutlets
+    @IBOutlet weak var gameOverPanel: GameOverView!
     @IBOutlet weak var hpContainer: UIStackView!
     @IBOutlet weak var scoreImage: UIImageView!
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var maxScoreImage: UIImageView!
+    @IBOutlet weak var maxScoreLabel: UILabel!
+    @IBOutlet weak var playPauseContainer: UIView!
+    @IBOutlet weak var playPauseImageView: UIImageView!
+    
+    private var tapGestureRecognizer: UITapGestureRecognizer!
     
     var scene: GameScene!
     var game = Game(prefs: .default)
@@ -33,8 +40,6 @@ private extension GameViewController {
     func setupScene() {
         let skView = view as! SKView
         skView.isMultipleTouchEnabled = false
-        skView.showsFPS = true
-        skView.showsNodeCount = true
         
         scene = GameScene(size: skView.bounds.size, prefs: .default)
         scene.scaleMode = .aspectFill
@@ -53,6 +58,8 @@ private extension GameViewController {
     func setupUI() {
         wickView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(wickView)
+        scene.backgroundColor = Colors.bg
+        gameOverPanel.alpha = 0
         
         NSLayoutConstraint.activate([
             wickView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -60,6 +67,13 @@ private extension GameViewController {
             wickView.widthAnchor.constraint(equalToConstant: 200),
             wickView.heightAnchor.constraint(equalToConstant: 16)
         ])
+        
+        maxScoreLabel.text = String(UserDefaults.standard.maxScore)
+        
+        playPauseContainer.layer.borderColor = UIColor.lightGray.cgColor
+        playPauseContainer.layer.cornerRadius = 40
+        playPauseContainer.layer.borderWidth = 3
+        playPauseContainer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(playPauseTap)))
     }
 }
 
@@ -78,9 +92,9 @@ extension GameViewController: GameEventDelegate {
         case .traceDisappeared(c: let c):
             scene.removeTrace(at: c)
             
-        case .coinAppeared(let c):
-            scene.addCoin(at: c, time: game.coinLifetime)
-            wickView.fire(with: game.coinLifetime)
+        case .coinAppeared(let c, let is5):
+            scene.addCoin(at: c, time: game.coinLifetime, is5: is5)
+            wickView.fire(with: game.coinLifetime, color: is5 ? Colors.coin5 : Colors.coin)
         case .coinDisappeared(let c):
             scene.removeCoin(at: c, eaten: false)
             wickView.putOut()
@@ -92,6 +106,9 @@ extension GameViewController: GameEventDelegate {
             updateScore(new: newScore)
         case .hpChanged(let newHp):
             updateHP(new: newHp)
+            
+        case .gameOver:
+            showGameOver()
         }
     }
 }
@@ -121,8 +138,29 @@ extension GameViewController: GameSceneDelegate {
 // MARK: - UI
 
 private extension GameViewController {
+    func generateHpImage() -> UIImageView {
+        UIImageView(image: Images.hp)
+    }
+    
+    @objc func playPauseTap() {
+        if scene.isPaused {
+            resume()
+        } else {
+            pause()
+        }
+    }
+}
+
+// MARK: - Game cycle
+
+private extension GameViewController {
     func updateScore(new: Int) {
         scoreLabel.text = String(new)
+        gameOverPanel.set(score: new)
+        if new > UserDefaults.standard.maxScore {
+            maxScoreLabel.text = String(new)
+            UserDefaults.standard.maxScore = new
+        }
     }
     
     func updateHP(new: Int) {
@@ -138,7 +176,47 @@ private extension GameViewController {
         }
     }
     
-    func generateHpImage() -> UIImageView {
-        UIImageView(image: Images.hp)
+    func showGameOver() {
+        scene.isUserInteractionEnabled = false
+        scene.isPaused = true
+        UIView.animate(withDuration: 0.3) {
+            self.gameOverPanel.alpha = 1
+        }
+        wickView.putOut()
+        playPauseContainer.isUserInteractionEnabled = false
+        
+        self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.hideGameOver))
+        self.view.addGestureRecognizer(self.tapGestureRecognizer)
+    }
+    
+    @objc func hideGameOver() {
+        scene.isUserInteractionEnabled = true
+        scene.isPaused = false
+        gameOverPanel.alpha = 0
+        playPauseContainer.isUserInteractionEnabled = true
+        
+        
+        view.removeGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer = nil
+        
+        startGame()
+    }
+    
+    func pause() {
+        scene.isPaused = true
+        scene.isUserInteractionEnabled = false
+        scene.backgroundColor = Colors.paused
+        scene.alpha = 0.7
+        wickView.pauseLayer()
+        playPauseImageView.image = UIImage.init(systemName: "play.fill")
+    }
+    
+    func resume() {
+        scene.isPaused = false
+        scene.isUserInteractionEnabled = true
+        scene.backgroundColor = Colors.bg
+        scene.alpha = 1
+        wickView.resumeLayer()
+        playPauseImageView.image = UIImage.init(systemName: "pause.fill")
     }
 }

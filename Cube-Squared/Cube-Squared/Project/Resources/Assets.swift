@@ -4,6 +4,7 @@ enum Assets {
     static let emptyTile = "empty_tile"
     static let trace = "trace"
     static let coin = "coin"
+    static let coin5 = "coin5"
     static let cube = "cube"
     
     static let cubeRoll = [
@@ -19,4 +20,5 @@ enum Assets {
 enum Images {
     static let hp = UIImage(named: "hp")
     static let c = UIImage(named: "c")
+    static let c_max = UIImage(named: "c_max")
 }

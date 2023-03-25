@@ -53,6 +53,7 @@ class GameScene: SKScene {
             
         }
     }
+    private var cachedDirs: [Direction]?
     
     // MARK: - SKScene
     
@@ -76,8 +77,6 @@ class GameScene: SKScene {
         bottomLayer.position = layerPosition
         midLayer.position = layerPosition
         topLayer.position = layerPosition
-        
-        backgroundColor = .black
     }
     
     required init?(coder aDecoder: NSCoder) { fatalError() }
@@ -107,6 +106,7 @@ class GameScene: SKScene {
  
 extension GameScene {
     func reset() {
+        isCubeMoving = false
         for key in emptyTiles.keys {
             emptyTiles.removeValue(forKey: key)?.removeFromParent()
         }
@@ -153,6 +153,10 @@ extension GameScene {
             guard let self else { return }
             self.isCubeMoving = false
             self.cube?.texture = .init(imageNamed: Assets.cube)
+            if let cachedDirs = self.cachedDirs {
+                self.gameSceneDelegate?.pan(to: cachedDirs, rolling: true)
+                self.cachedDirs = nil
+            }
         }
     }
     
@@ -177,8 +181,8 @@ extension GameScene {
         traces.removeValue(forKey: c)?.removeFromParent()
     }
     
-    func addCoin(at c: Coordinate, time: TimeInterval) {
-        let coin = generateCoin()
+    func addCoin(at c: Coordinate, time: TimeInterval, is5: Bool) {
+        let coin = generateCoin(is5: is5)
         midLayer.addChild(coin)
         coin.position = point(for: c)
         coins[c] = coin
@@ -231,15 +235,19 @@ private extension GameScene {
         gameSceneDelegate?.pan(to: dirs, rolling: false)
     }
     func handleDirectionChange() {
-        guard !isCubeMoving else { return }
         guard let dirs = ggr.state.directions else {
             assertionFailure()
+            return
+        }
+        guard !isCubeMoving else {
+            if dirs.first != rollingDirection {
+                self.cachedDirs = ggr.state.directions
+            }
             return
         }
         gameSceneDelegate?.pan(to: dirs, rolling: true)
     }
     func handleEnded() {
-//        rollingDirection = nil
     }
 }
 
@@ -274,8 +282,8 @@ private extension GameScene {
         generateTile(with: Assets.trace)
     }
     
-    func generateCoin() -> SKSpriteNode {
-        generateTile(with: Assets.coin)
+    func generateCoin(is5: Bool) -> SKSpriteNode {
+        generateTile(with: is5 ? Assets.coin5 : Assets.coin)
     }
     
     func generateCube() -> SKSpriteNode {

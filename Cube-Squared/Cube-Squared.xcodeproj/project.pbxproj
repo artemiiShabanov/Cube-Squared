@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A4630EE929CDD029007B7831 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4630EE829CDD029007B7831 /* Random.swift */; };
 		A4B0F1BF29C37BBC008C653A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B0F1BE29C37BBC008C653A /* AppDelegate.swift */; };
 		A4B0F1C529C37BBC008C653A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B0F1C429C37BBC008C653A /* GameScene.swift */; };
 		A4B0F1C729C37BBC008C653A /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B0F1C629C37BBC008C653A /* GameViewController.swift */; };
@@ -29,9 +30,12 @@
 		A4E4FE1B29CB50540087D372 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E4FE1A29CB50540087D372 /* Colors.swift */; };
 		A4E4FE1D29CB50BC0087D372 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E4FE1C29CB50BC0087D372 /* Assets.swift */; };
 		A4E4FE2229CBB0080087D372 /* WickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E4FE2129CBB0080087D372 /* WickView.swift */; };
+		A4E4FE2429CDA6B20087D372 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E4FE2329CDA6B20087D372 /* GameOverView.swift */; };
+		A4E4FE2629CDB5930087D372 /* UIView+anim.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E4FE2529CDB5930087D372 /* UIView+anim.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A4630EE829CDD029007B7831 /* Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 		A4B0F1BB29C37BBC008C653A /* Cube-Squared.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cube-Squared.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4B0F1BE29C37BBC008C653A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A4B0F1C429C37BBC008C653A /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -55,6 +59,8 @@
 		A4E4FE1A29CB50540087D372 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		A4E4FE1C29CB50BC0087D372 /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		A4E4FE2129CBB0080087D372 /* WickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WickView.swift; sourceTree = "<group>"; };
+		A4E4FE2329CDA6B20087D372 /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
+		A4E4FE2529CDB5930087D372 /* UIView+anim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+anim.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,7 @@
 				A4B0F1DE29C8AFA1008C653A /* Field.swift */,
 				A4B0F1E029C8B44B008C653A /* Geometry.swift */,
 				A4B0F1E229C8BB6F008C653A /* Preferences.swift */,
+				A4630EE829CDD029007B7831 /* Random.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -125,7 +132,6 @@
 				A4B0F1BE29C37BBC008C653A /* AppDelegate.swift */,
 				A4B0F1E729C8ED21008C653A /* UserDefaults+AppDomain.swift */,
 				A4B0F1CD29C37BBD008C653A /* LaunchScreen.storyboard */,
-				A4B0F1C829C37BBC008C653A /* Main.storyboard */,
 				A4B0F1CB29C37BBD008C653A /* Assets.xcassets */,
 			);
 			path = Project;
@@ -134,8 +140,11 @@
 		A4B0F1E629C8EBB3008C653A /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				A4B0F1C829C37BBC008C653A /* Main.storyboard */,
 				A4B0F1C629C37BBC008C653A /* GameViewController.swift */,
 				A4E4FE2129CBB0080087D372 /* WickView.swift */,
+				A4E4FE2329CDA6B20087D372 /* GameOverView.swift */,
+				A4E4FE2529CDB5930087D372 /* UIView+anim.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -248,13 +257,16 @@
 				A4B0F1DF29C8AFA1008C653A /* Field.swift in Sources */,
 				A4E4FE1B29CB50540087D372 /* Colors.swift in Sources */,
 				A4E4FE2229CBB0080087D372 /* WickView.swift in Sources */,
+				A4630EE929CDD029007B7831 /* Random.swift in Sources */,
 				A4B0F1E329C8BB6F008C653A /* Preferences.swift in Sources */,
 				A4B0F1F429C8F02B008C653A /* Haptics.swift in Sources */,
+				A4E4FE2629CDB5930087D372 /* UIView+anim.swift in Sources */,
 				A4B0F1E129C8B44B008C653A /* Geometry.swift in Sources */,
 				A4B0F1C529C37BBC008C653A /* GameScene.swift in Sources */,
 				A4B0F1E829C8ED21008C653A /* UserDefaults+AppDomain.swift in Sources */,
 				A4B0F1C729C37BBC008C653A /* GameViewController.swift in Sources */,
 				A4E4FE1D29CB50BC0087D372 /* Assets.swift in Sources */,
+				A4E4FE2429CDA6B20087D372 /* GameOverView.swift in Sources */,
 				A4B0F1F629C8F132008C653A /* GestureRecognizer.swift in Sources */,
 				A4B0F1EE29C8EF5E008C653A /* Sounds.swift in Sources */,
 				A4B0F1BF29C37BBC008C653A /* AppDelegate.swift in Sources */,
