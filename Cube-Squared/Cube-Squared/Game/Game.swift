@@ -25,11 +25,14 @@ protocol GameEventDelegate: AnyObject {
 final class Game {
     private var field: Field
     private var cubePosition: Coordinate
+    private var lostHP = false
     private let preferences: Preferences
+    private var cur_max = 0
     
     private(set) var score: Int = 0 {
         didSet {
             delegate?.handle(event: .scoreChanged(new: score))
+            lostHP = false
         }
     }
     private(set) var hp: Int = 0 {
@@ -121,6 +124,7 @@ final class Game {
         
         hp -= 1
         if hp > 0 {
+            lostHP = true
             placeCoin()
         } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: { [weak self] in
@@ -139,7 +143,10 @@ extension Game {
     }
     
     var coinLifetime: TimeInterval {
-        preferences.coinFunction(score)
+        if lostHP {
+            return Double.infinity
+        }
+        return preferences.coinFunction(score)
     }
 }
 
@@ -157,5 +164,8 @@ private extension Game {
         let is5 = Random.bool(with: preferences.coin5Chance)
         field.add(type: is5 ? .coin5 : .coin, at: c)
         delegate?.handle(event: .coinAppeared(c: c, is5: is5))
+        
+        cur_max += is5 ? 5 : 1
+        print(cur_max)
     }
 }
