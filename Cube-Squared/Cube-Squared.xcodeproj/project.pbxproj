@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A4511C4229D071880037FA17 /* coin.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4511C4029D071880037FA17 /* coin.wav */; };
+		A4511C4829D073050037FA17 /* roll.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4511C4729D073050037FA17 /* roll.wav */; };
+		A4511C4A29D073C70037FA17 /* error.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4511C4929D073C70037FA17 /* error.wav */; };
 		A4630EE929CDD029007B7831 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4630EE829CDD029007B7831 /* Random.swift */; };
 		A4B0F1BF29C37BBC008C653A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B0F1BE29C37BBC008C653A /* AppDelegate.swift */; };
 		A4B0F1C529C37BBC008C653A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B0F1C429C37BBC008C653A /* GameScene.swift */; };
@@ -19,9 +22,7 @@
 		A4B0F1E129C8B44B008C653A /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B0F1E029C8B44B008C653A /* Geometry.swift */; };
 		A4B0F1E329C8BB6F008C653A /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B0F1E229C8BB6F008C653A /* Preferences.swift */; };
 		A4B0F1E829C8ED21008C653A /* UserDefaults+AppDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B0F1E729C8ED21008C653A /* UserDefaults+AppDomain.swift */; };
-		A4B0F1EB29C8EF3F008C653A /* roll.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4B0F1EA29C8EF3F008C653A /* roll.wav */; };
 		A4B0F1EE29C8EF5E008C653A /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B0F1ED29C8EF5E008C653A /* Sounds.swift */; };
-		A4B0F1F029C8EFA7008C653A /* coin.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4B0F1EF29C8EFA7008C653A /* coin.wav */; };
 		A4B0F1F429C8F02B008C653A /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B0F1F329C8F02B008C653A /* Haptics.swift */; };
 		A4B0F1F629C8F132008C653A /* GestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B0F1F529C8F132008C653A /* GestureRecognizer.swift */; };
 		A4B0F1F829CA7A0F008C653A /* Improvements-list.txt in Resources */ = {isa = PBXBuildFile; fileRef = A4B0F1F729CA7A0F008C653A /* Improvements-list.txt */; };
@@ -35,6 +36,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A4511C4029D071880037FA17 /* coin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = coin.wav; sourceTree = "<group>"; };
+		A4511C4729D073050037FA17 /* roll.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = roll.wav; sourceTree = "<group>"; };
+		A4511C4929D073C70037FA17 /* error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = error.wav; sourceTree = "<group>"; };
 		A4630EE829CDD029007B7831 /* Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 		A4B0F1BB29C37BBC008C653A /* Cube-Squared.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cube-Squared.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4B0F1BE29C37BBC008C653A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -48,9 +52,7 @@
 		A4B0F1E029C8B44B008C653A /* Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
 		A4B0F1E229C8BB6F008C653A /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		A4B0F1E729C8ED21008C653A /* UserDefaults+AppDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+AppDomain.swift"; sourceTree = "<group>"; };
-		A4B0F1EA29C8EF3F008C653A /* roll.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = roll.wav; sourceTree = "<group>"; };
 		A4B0F1ED29C8EF5E008C653A /* Sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
-		A4B0F1EF29C8EFA7008C653A /* coin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = coin.wav; sourceTree = "<group>"; };
 		A4B0F1F329C8F02B008C653A /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		A4B0F1F529C8F132008C653A /* GestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureRecognizer.swift; sourceTree = "<group>"; };
 		A4B0F1F729CA7A0F008C653A /* Improvements-list.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Improvements-list.txt"; sourceTree = "<group>"; };
@@ -152,9 +154,10 @@
 		A4B0F1E929C8EF11008C653A /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				A4511C4029D071880037FA17 /* coin.wav */,
+				A4511C4929D073C70037FA17 /* error.wav */,
+				A4511C4729D073050037FA17 /* roll.wav */,
 				A4B0F1ED29C8EF5E008C653A /* Sounds.swift */,
-				A4B0F1EF29C8EFA7008C653A /* coin.wav */,
-				A4B0F1EA29C8EF3F008C653A /* roll.wav */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -236,12 +239,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4B0F1EB29C8EF3F008C653A /* roll.wav in Resources */,
 				A4E4FE1929CB4FF50087D372 /* Images.xcassets in Resources */,
-				A4B0F1F029C8EFA7008C653A /* coin.wav in Resources */,
 				A4B0F1CA29C37BBC008C653A /* Main.storyboard in Resources */,
 				A4B0F1CC29C37BBD008C653A /* Assets.xcassets in Resources */,
 				A4B0F1CF29C37BBD008C653A /* LaunchScreen.storyboard in Resources */,
+				A4511C4229D071880037FA17 /* coin.wav in Resources */,
+				A4511C4A29D073C70037FA17 /* error.wav in Resources */,
+				A4511C4829D073050037FA17 /* roll.wav in Resources */,
 				A4B0F1F829CA7A0F008C653A /* Improvements-list.txt in Resources */,
 				A4E4FE1729CB4FEB0087D372 /* Colors.xcassets in Resources */,
 			);
@@ -416,12 +420,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 9JH2U4SKKP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -443,12 +448,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 9JH2U4SKKP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -4,10 +4,10 @@ typealias TimeFunction = (Int) -> TimeInterval
 
 func standardForTrace(score: Int) -> TimeInterval {
     if score > 100 {
-        return 3
+        return 4.5
     }
     if score > 50 {
-        return 4
+        return 4.75
     }
     if score > 30 {
         return 5
@@ -22,8 +22,14 @@ func standardForCoin(score: Int) -> TimeInterval {
     if score == 0 {
         return Double.infinity
     }
+    if score > 140 {
+        return 1.4
+    }
+    if score > 120 {
+        return 1.5
+    }
     if score > 100 {
-        return 1.3
+        return 1.6
     }
     if score > 80 {
         return 1.7

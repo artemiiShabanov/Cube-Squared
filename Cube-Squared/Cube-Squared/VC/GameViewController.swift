@@ -13,6 +13,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var maxScoreLabel: UILabel!
     @IBOutlet weak var playPauseContainer: UIView!
     @IBOutlet weak var playPauseImageView: UIImageView!
+    @IBOutlet weak var restartButton: UIButton!
     
     private var tapGestureRecognizer: UITapGestureRecognizer!
     
@@ -31,6 +32,15 @@ class GameViewController: UIViewController {
 
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+}
+
+// MARK: - Actions
+
+extension GameViewController {
+    @IBAction func restart() {
+        wickView.putOut()
+        startGame()
     }
 }
 
@@ -72,7 +82,7 @@ private extension GameViewController {
         
         playPauseContainer.layer.borderColor = UIColor.lightGray.cgColor
         playPauseContainer.layer.cornerRadius = 40
-        playPauseContainer.layer.borderWidth = 3
+        playPauseContainer.layer.borderWidth = 2
         playPauseContainer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(playPauseTap)))
     }
 }
@@ -177,24 +187,29 @@ private extension GameViewController {
     }
     
     func showGameOver() {
+        let skView = view as! SKView
+        skView.isPaused = true
+        
         scene.isUserInteractionEnabled = false
-        scene.isPaused = true
         UIView.animate(withDuration: 0.3) {
             self.gameOverPanel.alpha = 1
         }
         wickView.putOut()
         playPauseContainer.isUserInteractionEnabled = false
+        restartButton.isEnabled = false
         
         self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.hideGameOver))
         self.view.addGestureRecognizer(self.tapGestureRecognizer)
     }
     
     @objc func hideGameOver() {
+        let skView = view as! SKView
+        skView.isPaused = false
+        
         scene.isUserInteractionEnabled = true
-        scene.isPaused = false
         gameOverPanel.alpha = 0
         playPauseContainer.isUserInteractionEnabled = true
-        
+        restartButton.isEnabled = true
         
         view.removeGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer = nil
@@ -203,19 +218,27 @@ private extension GameViewController {
     }
     
     func pause() {
-        scene.isPaused = true
+        let skView = view as! SKView
+        skView.isPaused = true
+        
         scene.isUserInteractionEnabled = false
         scene.backgroundColor = Colors.paused
         scene.alpha = 0.7
+        
+        restartButton.isEnabled = false
         wickView.pauseLayer()
         playPauseImageView.image = UIImage.init(systemName: "play.fill")
     }
     
     func resume() {
-        scene.isPaused = false
+        let skView = view as! SKView
+        skView.isPaused = false
+        
         scene.isUserInteractionEnabled = true
         scene.backgroundColor = Colors.bg
         scene.alpha = 1
+        
+        restartButton.isEnabled = true
         wickView.resumeLayer()
         playPauseImageView.image = UIImage.init(systemName: "pause.fill")
     }
