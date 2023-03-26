@@ -11,6 +11,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var maxScoreImage: UIImageView!
     @IBOutlet weak var maxScoreLabel: UILabel!
+    @IBOutlet weak var topContainer: UIView!
     @IBOutlet weak var playPauseContainer: UIView!
     @IBOutlet weak var playPauseImageView: UIImageView!
     @IBOutlet weak var restartButton: UIButton!
@@ -80,9 +81,8 @@ private extension GameViewController {
         
         maxScoreLabel.text = String(UserDefaults.standard.maxScore)
         
-        playPauseContainer.layer.borderColor = UIColor.lightGray.cgColor
-        playPauseContainer.layer.cornerRadius = 40
-        playPauseContainer.layer.borderWidth = 2
+        topContainer.layer.cornerRadius = 35
+        playPauseContainer.layer.cornerRadius = 35
         playPauseContainer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(playPauseTap)))
     }
 }

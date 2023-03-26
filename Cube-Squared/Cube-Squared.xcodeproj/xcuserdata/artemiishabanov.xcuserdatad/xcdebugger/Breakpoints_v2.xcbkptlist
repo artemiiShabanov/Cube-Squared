@@ -46,8 +46,8 @@
             filePath = "Cube-Squared/VC/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "setupUI()"
             landmarkType = "7">
          </BreakpointContent>
@@ -241,6 +241,70 @@
             startingLineNumber = "156"
             endingLineNumber = "156"
             landmarkName = "playPauseTap()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D5EBCD22-DF8C-47EC-9169-AD06D7D13584"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cube-Squared/VC/WickView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "fire(with:color:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D5EBCD22-DF8C-47EC-9169-AD06D7D13584 - fff36fd87c5b557b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Bool) -&gt; () in Cube_Squared.WickView.fire(with: Swift.Double, color: __C.UIColor) -&gt; ()"
+                  moduleName = "Cube-Squared"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/artemiishabanov/GitHub/Cube-Squared/Cube-Squared/Cube-Squared/VC/WickView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "432">
+               </Location>
+               <Location
+                  uuid = "D5EBCD22-DF8C-47EC-9169-AD06D7D13584 - f87c546fbe5ab499"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #2 (Swift.Bool) -&gt; () in Cube_Squared.WickView.fire(with: Swift.Double, color: __C.UIColor) -&gt; ()"
+                  moduleName = "Cube-Squared"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/artemiishabanov/GitHub/Cube-Squared/Cube-Squared/Cube-Squared/VC/WickView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6750031F-A29C-4364-8F21-BD1713A3D1CE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cube-Squared/VC/WickView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "fire(with:color:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
