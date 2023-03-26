@@ -5,6 +5,7 @@ enum TileType: Int, CaseIterable {
     case trace
     case cube
     case coin5
+    case hp
     
     fileprivate var val: Int {
         return 1 << rawValue
@@ -55,6 +56,13 @@ struct Field {
             return false
         }
         return tiles[c.x][c.y].has(type)
+    }
+    
+    func has(anyOf types: [TileType], at c: Coordinate) -> Bool {
+        guard check(coordinate: c) else {
+            return false
+        }
+        return types.reduce(false, { $0 || tiles[c.x][c.y].has($1)})
     }
     
     mutating func add(type: TileType, at c: Coordinate) {

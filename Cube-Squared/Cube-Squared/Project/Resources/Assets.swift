@@ -6,6 +6,7 @@ enum Assets {
     static let coin = "coin"
     static let coin5 = "coin5"
     static let cube = "cube"
+    static let hp_coin = "hp_coin"
     
     static let cubeRoll = [
         "cube1",

@@ -102,9 +102,9 @@ extension GameViewController: GameEventDelegate {
         case .traceDisappeared(c: let c):
             scene.removeTrace(at: c)
             
-        case .coinAppeared(let c, let is5):
-            scene.addCoin(at: c, time: game.coinLifetime, is5: is5)
-            wickView.fire(with: game.coinLifetime, color: is5 ? Colors.coin5 : Colors.coin)
+        case .coinAppeared(let c, let type):
+            scene.addCoin(at: c, time: game.coinLifetime, type: type)
+            wickView.fire(with: game.coinLifetime, color: type.color)
         case .coinDisappeared(let c):
             scene.removeCoin(at: c, eaten: false)
             wickView.putOut()

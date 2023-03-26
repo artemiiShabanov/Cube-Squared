@@ -58,12 +58,14 @@ struct Preferences {
     let coinFunction: TimeFunction
     let startingHp: Int
     let coin5Chance: Double
+    let hpChance: Double
     
     static let `default` = Preferences(
         fieldSize: .init(width: 5, height: 5),
         traceFunction: standardForTrace,
         coinFunction: standardForCoin,
         startingHp: 3,
-        coin5Chance: 0.05
+        coin5Chance: 0.05,
+        hpChance: 0.03
     )
 }

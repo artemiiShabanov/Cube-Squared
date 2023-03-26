@@ -8,7 +8,7 @@ enum GameEvent {
     case traceAppeared(c: Coordinate)
     case traceDisappeared(c: Coordinate)
     
-    case coinAppeared(c: Coordinate, is5: Bool)
+    case coinAppeared(c: Coordinate, type: CoinType)
     case coinDisappeared(c: Coordinate)
     case coinEaten(c: Coordinate)
     
@@ -27,7 +27,6 @@ final class Game {
     private var cubePosition: Coordinate
     private var lostHP = false
     private let preferences: Preferences
-    private var cur_max = 0
     
     private(set) var score: Int = 0 {
         didSet {
@@ -78,7 +77,7 @@ final class Game {
     func rollIfPossible(to dirs: [Direction]) -> Bool {
         for d in dirs {
             let shifted = cubePosition.shifted(to: d)
-            if field.has(type: .trace, at: shifted) || field.has(type: .coin, at: shifted) || field.has(type: .coin5, at: shifted) {
+            if field.has(anyOf: [.trace] + CoinType.allCases.map(\.tile), at: shifted) {
                 moveCube(to: d, rolling: true)
                 return true
             }
@@ -105,6 +104,12 @@ final class Game {
             field.del(type: .coin5, at: cubePosition)
             delegate?.handle(event: .coinEaten(c: cubePosition))
             placeCoin()
+        } else if field.has(type: .hp, at: cubePosition) {
+            score += 1
+            hp += 1
+            field.del(type: .hp, at: cubePosition)
+            delegate?.handle(event: .coinEaten(c: cubePosition))
+            placeCoin()
         }
     }
     
@@ -117,9 +122,9 @@ final class Game {
     }
     
     func expiredCoin(at c: Coordinate) {
-        assert(field.has(type: .coin, at: c) || field.has(type: .coin5, at: c))
-        field.del(type: .coin, at: c)
-        field.del(type: .coin5, at: c)
+        let coinTilesTypes = CoinType.allCases.map(\.tile)
+        assert(field.has(anyOf: coinTilesTypes, at: c))
+        coinTilesTypes.forEach { field.del(type: $0, at: c) }
         delegate?.handle(event: .coinDisappeared(c: c))
         
         hp -= 1
@@ -161,11 +166,13 @@ private extension Game {
         guard let c = randomCoordinate(excludingTiles: [.cube]) else {
             return
         }
-        let is5 = Random.bool(with: preferences.coin5Chance)
-        field.add(type: is5 ? .coin5 : .coin, at: c)
-        delegate?.handle(event: .coinAppeared(c: c, is5: is5))
         
-        cur_max += is5 ? 5 : 1
-        print(cur_max)
+        let isHP = (hp < preferences.startingHp) && Random.bool(with: preferences.hpChance)
+        let is5 = Random.bool(with: preferences.coin5Chance)
+        
+        let coinType: CoinType = isHP ? .hp : is5 ? .x5 : .simple
+        
+        field.add(type: coinType.tile, at: c)
+        delegate?.handle(event: .coinAppeared(c: c, type: coinType))
     }
 }

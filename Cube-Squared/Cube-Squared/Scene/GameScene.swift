@@ -181,8 +181,8 @@ extension GameScene {
         traces.removeValue(forKey: c)?.removeFromParent()
     }
     
-    func addCoin(at c: Coordinate, time: TimeInterval, is5: Bool) {
-        let coin = generateCoin(is5: is5)
+    func addCoin(at c: Coordinate, time: TimeInterval, type: CoinType) {
+        let coin = generateCoin(type: type)
         midLayer.addChild(coin)
         coin.position = point(for: c)
         coins[c] = coin
@@ -283,8 +283,8 @@ private extension GameScene {
         generateTile(with: Assets.trace)
     }
     
-    func generateCoin(is5: Bool) -> SKSpriteNode {
-        generateTile(with: is5 ? Assets.coin5 : Assets.coin)
+    func generateCoin(type: CoinType) -> SKSpriteNode {
+        generateTile(with: type.asset)
     }
     
     func generateCube() -> SKSpriteNode {
