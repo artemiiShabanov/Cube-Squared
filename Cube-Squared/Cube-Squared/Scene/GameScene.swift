@@ -143,7 +143,7 @@ extension GameScene {
         self.rollingDirection = d
         let duration = rolling ? Constants.rollDuration : Constants.moveDuration
         
-        Haptics.shared.playSoft()
+        Haptics.shared.play(type: .soft)
         isCubeMoving = true
         cube.run(.group([
             .move(to: point(for: newC), duration: duration),
@@ -209,9 +209,10 @@ extension GameScene {
         coin.removeAllActions()
         if eaten {
             run(SoundFX.coinSound)
-            Haptics.shared.playMedium()
+            Haptics.shared.play(type: .heavy)
         } else {
-            Haptics.shared.playRigid()
+            run(SoundFX.errorSound)
+            Haptics.shared.play(type: .old)
         }
         coin.run(.fadeOut(withDuration: 0.2), completion: {
             coin.removeFromParent()
@@ -219,7 +220,7 @@ extension GameScene {
     }
     
     func hitWall() {
-        Haptics.shared.playRigid()
+        Haptics.shared.play(type: .rigid)
     }
 }
 

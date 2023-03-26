@@ -6,4 +6,5 @@ enum Colors {
     static let cube = UIColor(named: "cube")!
     static let bg = UIColor(named: "bg")!
     static let paused = UIColor(named: "paused")!
+    static let control = UIColor(named: "control")!
 }

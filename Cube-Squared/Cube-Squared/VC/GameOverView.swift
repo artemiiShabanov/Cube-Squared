@@ -20,8 +20,6 @@ final class GameOverView: UIView {
     
     private func setupUI() {
         backgroundColor = .darkGray.withAlphaComponent(0.98)
-        layer.borderWidth = 6
-        layer.borderColor = UIColor.white.cgColor
         layer.cornerRadius = 20
         
         addSubview(coinImage)

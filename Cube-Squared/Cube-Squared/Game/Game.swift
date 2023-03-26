@@ -123,7 +123,9 @@ final class Game {
         if hp > 0 {
             placeCoin()
         } else {
-            delegate?.handle(event: .gameOver)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: { [weak self] in
+                self?.delegate?.handle(event: .gameOver)
+            })
         }
     }
     

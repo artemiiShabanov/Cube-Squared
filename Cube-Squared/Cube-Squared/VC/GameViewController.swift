@@ -82,7 +82,7 @@ private extension GameViewController {
         
         playPauseContainer.layer.borderColor = UIColor.lightGray.cgColor
         playPauseContainer.layer.cornerRadius = 40
-        playPauseContainer.layer.borderWidth = 3
+        playPauseContainer.layer.borderWidth = 2
         playPauseContainer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(playPauseTap)))
     }
 }
@@ -224,6 +224,8 @@ private extension GameViewController {
         scene.isUserInteractionEnabled = false
         scene.backgroundColor = Colors.paused
         scene.alpha = 0.7
+        
+        restartButton.isEnabled = false
         wickView.pauseLayer()
         playPauseImageView.image = UIImage.init(systemName: "play.fill")
     }
@@ -235,6 +237,8 @@ private extension GameViewController {
         scene.isUserInteractionEnabled = true
         scene.backgroundColor = Colors.bg
         scene.alpha = 1
+        
+        restartButton.isEnabled = true
         wickView.resumeLayer()
         playPauseImageView.image = UIImage.init(systemName: "pause.fill")
     }
