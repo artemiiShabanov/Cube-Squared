@@ -55,6 +55,7 @@ final class Game {
         hp = preferences.startingHp
         
         cubePosition = randomCoordinate(excludingTiles: [])!
+        field.add(type: .cube, at: cubePosition)
         delegate?.handle(event: .cubeAppeared(c: cubePosition))
         placeCoin()
     }

@@ -13,6 +13,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var maxScoreLabel: UILabel!
     @IBOutlet weak var playPauseContainer: UIView!
     @IBOutlet weak var playPauseImageView: UIImageView!
+    @IBOutlet weak var restartButton: UIButton!
     
     private var tapGestureRecognizer: UITapGestureRecognizer!
     
@@ -31,6 +32,15 @@ class GameViewController: UIViewController {
 
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+}
+
+// MARK: - Actions
+
+extension GameViewController {
+    @IBAction func restart() {
+        wickView.putOut()
+        startGame()
     }
 }
 
@@ -186,6 +196,7 @@ private extension GameViewController {
         }
         wickView.putOut()
         playPauseContainer.isUserInteractionEnabled = false
+        restartButton.isEnabled = false
         
         self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.hideGameOver))
         self.view.addGestureRecognizer(self.tapGestureRecognizer)
@@ -198,7 +209,7 @@ private extension GameViewController {
         scene.isUserInteractionEnabled = true
         gameOverPanel.alpha = 0
         playPauseContainer.isUserInteractionEnabled = true
-        
+        restartButton.isEnabled = true
         
         view.removeGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer = nil
