@@ -177,8 +177,10 @@ private extension GameViewController {
     }
     
     func showGameOver() {
+        let skView = view as! SKView
+        skView.isPaused = true
+        
         scene.isUserInteractionEnabled = false
-        scene.isPaused = true
         UIView.animate(withDuration: 0.3) {
             self.gameOverPanel.alpha = 1
         }
@@ -190,8 +192,10 @@ private extension GameViewController {
     }
     
     @objc func hideGameOver() {
+        let skView = view as! SKView
+        skView.isPaused = false
+        
         scene.isUserInteractionEnabled = true
-        scene.isPaused = false
         gameOverPanel.alpha = 0
         playPauseContainer.isUserInteractionEnabled = true
         
@@ -203,7 +207,9 @@ private extension GameViewController {
     }
     
     func pause() {
-        scene.isPaused = true
+        let skView = view as! SKView
+        skView.isPaused = true
+        
         scene.isUserInteractionEnabled = false
         scene.backgroundColor = Colors.paused
         scene.alpha = 0.7
@@ -212,7 +218,9 @@ private extension GameViewController {
     }
     
     func resume() {
-        scene.isPaused = false
+        let skView = view as! SKView
+        skView.isPaused = false
+        
         scene.isUserInteractionEnabled = true
         scene.backgroundColor = Colors.bg
         scene.alpha = 1
