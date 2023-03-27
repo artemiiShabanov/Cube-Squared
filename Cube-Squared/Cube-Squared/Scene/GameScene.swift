@@ -170,8 +170,9 @@ extension GameScene {
         trace.alpha = 0.8
         trace.run(.sequence([
             .fadeAlpha(by: -0.6, duration: time - 1),
-            .wait(forDuration: 0.9),
-            .scale(to: 0, duration: 0.1)
+            .wait(forDuration: 0.6),
+            .scale(to: 0, duration: 0.1),
+            .wait(forDuration: 0.3)
         ])) { [weak self] in
             self?.gameSceneDelegate?.traceExpired(at: c)
         }

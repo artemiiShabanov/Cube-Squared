@@ -1,53 +1,50 @@
 import UIKit
 
-var greeting = "Hello, playground"
-
-enum TileType: Int {
-    case coin = 0
-    case trace
-    case cube
+func standardForCoin(score: Int) -> TimeInterval {
+    let checkpoints = [
+        (0, Double.infinity),
+        (1, 5),
+        (50, 4),
+        (100, 3.5),
+        (150, 2.7),
+        (200, 2.1),
+        (300, 1.4),
+        (500, 1.2)
+    ]
     
-    fileprivate var val: Int {
-        return 1 << rawValue
+    var prev: (Int, Double)?
+    for el in checkpoints {
+        let upScore = el.0
+        let time = el.1
+        
+        if score <= upScore {
+            if let prev {
+                let prevScore = prev.0
+                let prevTime = prev.1
+                
+                let multiplicator = 1 - Double(score - prevScore) / Double(upScore - prevScore)
+                if multiplicator == 0 {
+                    return time
+                } else {
+                    return time + (prevTime - time) * multiplicator
+                }
+            } else {
+                return time
+            }
+        }
+        
+        prev = el
     }
+    
+    return checkpoints.last!.1
 }
 
-struct Tile: Hashable {
-    private var val: Int
-    
-    init(type: TileType? = nil) {
-        self.val = type?.val ?? 0
+var prev = Double.infinity
+for i in stride(from: 0, to: 650, by: 10) {
+    let x = standardForCoin(score: i)
+    print(i, " ", x)
+    if x > prev {
+        fatalError()
     }
-    
-    func has(_ type: TileType) -> Bool {
-        val & type.val != 0
-    }
-    
-    mutating func add(_ type: TileType) {
-        val += type.val
-    }
-    
-    mutating func del(_ type: TileType) {
-        val -= type.val
-    }
+    prev = x
 }
-
-var e = Tile(type: nil)
-let c = Tile(type: .coin)
-let t = Tile(type: .trace)
-let cu = Tile(type: .cube)
-
-()
-
-print(e.has(.trace))
-print(e.has(.cube))
-print(cu.has(.cube))
-
-e.add(.cube)
-print(e.has(.cube))
-
-e.add(.trace)
-print(e.has(.trace))
-
-e.del(.cube)
-print(e.has(.cube))
