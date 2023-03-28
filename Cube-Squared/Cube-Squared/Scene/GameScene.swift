@@ -170,8 +170,9 @@ extension GameScene {
         trace.alpha = 0.8
         trace.run(.sequence([
             .fadeAlpha(by: -0.6, duration: time - 1),
-            .wait(forDuration: 0.9),
-            .scale(to: 0, duration: 0.1)
+            .wait(forDuration: 0.6),
+            .scale(to: 0, duration: 0.1),
+            .wait(forDuration: 0.3)
         ])) { [weak self] in
             self?.gameSceneDelegate?.traceExpired(at: c)
         }
@@ -181,8 +182,8 @@ extension GameScene {
         traces.removeValue(forKey: c)?.removeFromParent()
     }
     
-    func addCoin(at c: Coordinate, time: TimeInterval, is5: Bool) {
-        let coin = generateCoin(is5: is5)
+    func addCoin(at c: Coordinate, time: TimeInterval, type: CoinType) {
+        let coin = generateCoin(type: type)
         midLayer.addChild(coin)
         coin.position = point(for: c)
         coins[c] = coin
@@ -283,8 +284,8 @@ private extension GameScene {
         generateTile(with: Assets.trace)
     }
     
-    func generateCoin(is5: Bool) -> SKSpriteNode {
-        generateTile(with: is5 ? Assets.coin5 : Assets.coin)
+    func generateCoin(type: CoinType) -> SKSpriteNode {
+        generateTile(with: type.asset)
     }
     
     func generateCube() -> SKSpriteNode {

@@ -1,6 +1,7 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import SPConfetti
 
 class GameViewController: UIViewController {
     
@@ -11,11 +12,13 @@ class GameViewController: UIViewController {
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var maxScoreImage: UIImageView!
     @IBOutlet weak var maxScoreLabel: UILabel!
+    @IBOutlet weak var topContainer: UIView!
     @IBOutlet weak var playPauseContainer: UIView!
     @IBOutlet weak var playPauseImageView: UIImageView!
     @IBOutlet weak var restartButton: UIButton!
     
     private var tapGestureRecognizer: UITapGestureRecognizer!
+    private var recordBroken = false
     
     var scene: GameScene!
     var game = Game(prefs: .default)
@@ -61,6 +64,7 @@ private extension GameViewController {
     }
     
     func startGame() {
+        recordBroken = false
         scene.reset()
         game.startGame()
     }
@@ -80,9 +84,8 @@ private extension GameViewController {
         
         maxScoreLabel.text = String(UserDefaults.standard.maxScore)
         
-        playPauseContainer.layer.borderColor = UIColor.lightGray.cgColor
-        playPauseContainer.layer.cornerRadius = 40
-        playPauseContainer.layer.borderWidth = 2
+        topContainer.layer.cornerRadius = 35
+        playPauseContainer.layer.cornerRadius = 35
         playPauseContainer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(playPauseTap)))
     }
 }
@@ -102,9 +105,9 @@ extension GameViewController: GameEventDelegate {
         case .traceDisappeared(c: let c):
             scene.removeTrace(at: c)
             
-        case .coinAppeared(let c, let is5):
-            scene.addCoin(at: c, time: game.coinLifetime, is5: is5)
-            wickView.fire(with: game.coinLifetime, color: is5 ? Colors.coin5 : Colors.coin)
+        case .coinAppeared(let c, let type):
+            scene.addCoin(at: c, time: game.coinLifetime, type: type)
+            wickView.fire(with: game.coinLifetime, color: type.color)
         case .coinDisappeared(let c):
             scene.removeCoin(at: c, eaten: false)
             wickView.putOut()
@@ -168,6 +171,7 @@ private extension GameViewController {
         scoreLabel.text = String(new)
         gameOverPanel.set(score: new)
         if new > UserDefaults.standard.maxScore {
+            recordBroken = true
             maxScoreLabel.text = String(new)
             UserDefaults.standard.maxScore = new
         }
@@ -200,9 +204,15 @@ private extension GameViewController {
         
         self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.hideGameOver))
         self.view.addGestureRecognizer(self.tapGestureRecognizer)
+        
+        if recordBroken {
+            SPConfetti.startAnimating(.fullWidthToDown, particles: [.triangle, .arc, .heart])
+        }
     }
     
     @objc func hideGameOver() {
+        SPConfetti.stopAnimating()
+        
         let skView = view as! SKView
         skView.isPaused = false
         

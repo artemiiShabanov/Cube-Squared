@@ -10,7 +10,9 @@
 		A4511C4229D071880037FA17 /* coin.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4511C4029D071880037FA17 /* coin.wav */; };
 		A4511C4829D073050037FA17 /* roll.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4511C4729D073050037FA17 /* roll.wav */; };
 		A4511C4A29D073C70037FA17 /* error.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4511C4929D073C70037FA17 /* error.wav */; };
+		A4511C4C29D0AC0E0037FA17 /* CoinType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4511C4B29D0AC0E0037FA17 /* CoinType.swift */; };
 		A4630EE929CDD029007B7831 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4630EE829CDD029007B7831 /* Random.swift */; };
+		A489619A29D2E50F0002EE30 /* SPConfetti in Frameworks */ = {isa = PBXBuildFile; productRef = A489619929D2E50F0002EE30 /* SPConfetti */; };
 		A4B0F1BF29C37BBC008C653A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B0F1BE29C37BBC008C653A /* AppDelegate.swift */; };
 		A4B0F1C529C37BBC008C653A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B0F1C429C37BBC008C653A /* GameScene.swift */; };
 		A4B0F1C729C37BBC008C653A /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B0F1C629C37BBC008C653A /* GameViewController.swift */; };
@@ -39,6 +41,7 @@
 		A4511C4029D071880037FA17 /* coin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = coin.wav; sourceTree = "<group>"; };
 		A4511C4729D073050037FA17 /* roll.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = roll.wav; sourceTree = "<group>"; };
 		A4511C4929D073C70037FA17 /* error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = error.wav; sourceTree = "<group>"; };
+		A4511C4B29D0AC0E0037FA17 /* CoinType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinType.swift; sourceTree = "<group>"; };
 		A4630EE829CDD029007B7831 /* Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 		A4B0F1BB29C37BBC008C653A /* Cube-Squared.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cube-Squared.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4B0F1BE29C37BBC008C653A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A489619A29D2E50F0002EE30 /* SPConfetti in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +116,7 @@
 				A4B0F1E029C8B44B008C653A /* Geometry.swift */,
 				A4B0F1E229C8BB6F008C653A /* Preferences.swift */,
 				A4630EE829CDD029007B7831 /* Random.swift */,
+				A4511C4B29D0AC0E0037FA17 /* CoinType.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -197,6 +202,9 @@
 			dependencies = (
 			);
 			name = "Cube-Squared";
+			packageProductDependencies = (
+				A489619929D2E50F0002EE30 /* SPConfetti */,
+			);
 			productName = "Cube-Squared";
 			productReference = A4B0F1BB29C37BBC008C653A /* Cube-Squared.app */;
 			productType = "com.apple.product-type.application";
@@ -225,6 +233,9 @@
 				Base,
 			);
 			mainGroup = A4B0F1B229C37BBC008C653A;
+			packageReferences = (
+				A489619829D2E50F0002EE30 /* XCRemoteSwiftPackageReference "SPConfetti" */,
+			);
 			productRefGroup = A4B0F1BC29C37BBC008C653A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -266,6 +277,7 @@
 				A4B0F1F429C8F02B008C653A /* Haptics.swift in Sources */,
 				A4E4FE2629CDB5930087D372 /* UIView+anim.swift in Sources */,
 				A4B0F1E129C8B44B008C653A /* Geometry.swift in Sources */,
+				A4511C4C29D0AC0E0037FA17 /* CoinType.swift in Sources */,
 				A4B0F1C529C37BBC008C653A /* GameScene.swift in Sources */,
 				A4B0F1E829C8ED21008C653A /* UserDefaults+AppDomain.swift in Sources */,
 				A4B0F1C729C37BBC008C653A /* GameViewController.swift in Sources */,
@@ -420,7 +432,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 9JH2U4SKKP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -448,7 +460,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 9JH2U4SKKP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -492,6 +504,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A489619829D2E50F0002EE30 /* XCRemoteSwiftPackageReference "SPConfetti" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ivanvorobei/SPConfetti";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A489619929D2E50F0002EE30 /* SPConfetti */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A489619829D2E50F0002EE30 /* XCRemoteSwiftPackageReference "SPConfetti" */;
+			productName = SPConfetti;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A4B0F1B329C37BBC008C653A /* Project object */;
 }

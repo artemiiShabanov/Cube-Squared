@@ -35,11 +35,11 @@ final class WickView: UIView {
         widthConstraint.constant = 0
         wick.backgroundColor = color.withAlphaComponent(0.7)
         layoutIfNeeded()
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.4) {
             self.wick.alpha = 1
         } completion: { _ in
-            self.widthConstraint.constant = -self.bounds.width + 20
-            UIView.animate(withDuration: time - 0.5, delay: 0.5, options: .curveEaseOut) {
+            self.widthConstraint.constant = -self.frame.width + 16
+            UIView.animate(withDuration: time - 0.4, delay: 0.4, options: .curveEaseOut) {
                 self.layoutIfNeeded()
             }
         }
