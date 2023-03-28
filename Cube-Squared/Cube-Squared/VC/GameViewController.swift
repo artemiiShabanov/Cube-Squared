@@ -32,6 +32,15 @@ class GameViewController: UIViewController {
         startGame()
         setupUI()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if !UserDefaults.standard.seenOnboarding {
+            present(OnboardingViewController(), animated: true)
+            UserDefaults.standard.seenOnboarding = true
+        }
+    }
 
     override var prefersStatusBarHidden: Bool {
         return true
