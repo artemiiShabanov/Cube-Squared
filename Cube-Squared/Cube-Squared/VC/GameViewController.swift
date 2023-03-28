@@ -1,6 +1,7 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import SPConfetti
 
 class GameViewController: UIViewController {
     
@@ -17,6 +18,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var restartButton: UIButton!
     
     private var tapGestureRecognizer: UITapGestureRecognizer!
+    private var recordBroken = false
     
     var scene: GameScene!
     var game = Game(prefs: .default)
@@ -62,6 +64,7 @@ private extension GameViewController {
     }
     
     func startGame() {
+        recordBroken = false
         scene.reset()
         game.startGame()
     }
@@ -168,6 +171,7 @@ private extension GameViewController {
         scoreLabel.text = String(new)
         gameOverPanel.set(score: new)
         if new > UserDefaults.standard.maxScore {
+            recordBroken = true
             maxScoreLabel.text = String(new)
             UserDefaults.standard.maxScore = new
         }
@@ -200,9 +204,15 @@ private extension GameViewController {
         
         self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.hideGameOver))
         self.view.addGestureRecognizer(self.tapGestureRecognizer)
+        
+        if recordBroken {
+            SPConfetti.startAnimating(.fullWidthToDown, particles: [.triangle, .arc, .heart])
+        }
     }
     
     @objc func hideGameOver() {
+        SPConfetti.stopAnimating()
+        
         let skView = view as! SKView
         skView.isPaused = false
         
