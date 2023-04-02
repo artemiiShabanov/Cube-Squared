@@ -1,6 +1,6 @@
 Cube-Squared is a 2D game developed on SpriteKit as part of the my study of gamedev.
 
-Feel free to look at [source code](https://github.com/artemiiShabanov/Cube-Squared) and try this game at [AppStore](https://github.com/artemiiShabanov/Cube-Squared).
+Feel free to look at [source code](https://github.com/artemiiShabanov/Cube-Squared) and try this game at [AppStore](https://apps.apple.com/ru/app/cube-squared/id6446372432?l=en).
 You also can contact me at [telegram](https://t.me/artemiishabanov) or artemshabanov7@mail.ru.
 
 Demo:
